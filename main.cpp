@@ -54,7 +54,7 @@ int main() {
             string studentNumSearch;
             cout << "Type in student number" <<endl;
             cin >> studentNumSearch;
-            if (find(studentRecord.begin(),studentRecord.end(),studentNumSearch))
+
         }
         else if (choice == "clear"){
             clear();

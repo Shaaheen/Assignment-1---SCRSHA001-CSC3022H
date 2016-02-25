@@ -39,12 +39,16 @@ namespace SCRSHA001{
         return studentRecord;
     }
 
+    string studentRecordToString(StudentRecord student){
+        return student.Name + " " + student.Surname + " " + student.StudentNumber +" " +
+               student.classRecord.term1 + " " + student.classRecord.term2 + " " +
+               student.classRecord.term3 + " " + student.classRecord.term4;
+    }
+
     string queryDatabase(vector<StudentRecord> studentRecord ){
         string records = "";
         for (StudentRecord student : studentRecord){
-            records = records + student.Name + " " + student.Surname + " " + student.StudentNumber +" " +
-                      student.classRecord.term1 + " " + student.classRecord.term2 + " " +
-                    student.classRecord.term3 + " " + student.classRecord.term4 + " " + "\n";
+            records = records + studentRecordToString(student) + "\n";
             //cout << student << endl;
         }
         return records;
@@ -80,6 +84,14 @@ namespace SCRSHA001{
         return studentRecords;
     }
 
+    void saveDatabaseToFile(std::vector<StudentRecord> studentRecords){
+        fstream  databaseFile;
+        databaseFile.open("StudentDatabase.txt", ios::out);
+        for (StudentRecord student:studentRecords){
+            databaseFile << studentRecordToString(student)<<endl;
+        }
+        databaseFile.close();
+    }
 
 
 }

@@ -25,6 +25,8 @@ namespace SCRSHA001{
 
     std::vector<StudentRecord> setUpDatabaseFromFile();
 
+    std::string studentRecordToString(StudentRecord studentRecord);
+
     std::string queryDatabase(std::vector<StudentRecord> studentRecord );
 
     std::vector<StudentRecord> addFromDatabase(std::string studentInfo,std::vector<StudentRecord> stdRecords);
@@ -32,6 +34,8 @@ namespace SCRSHA001{
     std::vector<StudentRecord> add_student(StudentRecord stdRec,std::vector<StudentRecord> stdRecords);
 
     void saveDatabaseToFile(std::vector<StudentRecord> studentRecords);
+
+    StudentRecord findStudentInDatabase(std::string studentNum, std::vector<StudentRecord> stdRecords);
 
 }
 
