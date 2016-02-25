@@ -7,10 +7,8 @@
 using namespace std;
 using namespace SCRSHA001;
 int main() {
-    int choice = -1;
-    std::vector<StudentRecord> studentRecord;
-
-
+    string choice = "-1";
+    std::vector<StudentRecord> studentRecord = setUpDatabaseFromFile();
 
     while (true) {
         cout << "0: Add student" << endl;
@@ -22,7 +20,7 @@ int main() {
         cout << "Enter a number (or q to quit) and press return... "<< endl;
         cin >> choice;
 
-        if (choice == 0){
+        if (choice == "0"){
             string name;
             string surname;
             string studentNum;
@@ -42,10 +40,14 @@ int main() {
 
             cout << newStudent.classRecord.term4 <<endl;
         }
-        else if (choice ==1){
+        else if (choice == "1"){
             //std:vector<string>::iterator it = studentRecord.begin();
             cout << SCRSHA001::queryDatabase(studentRecord) <<endl;
         }
+        else if (choice == "2"){
+            saveDatabaseToFile(studentRecord);
+        }
+
         else{
             break;
         }

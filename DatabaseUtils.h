@@ -31,7 +31,7 @@ namespace SCRSHA001{
 
     std::vector<StudentRecord> add_student(StudentRecord stdRec,std::vector<StudentRecord> stdRecords);
 
-
+    void saveDatabaseToFile(std::vector<StudentRecord> studentRecords);
 
 }
 

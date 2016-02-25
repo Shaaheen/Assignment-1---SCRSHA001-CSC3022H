@@ -17,9 +17,10 @@ namespace SCRSHA001{
 
         ifstream MyFile("StudentDatabase.txt");
         if (!MyFile) {
+            //If file not created then create it
             std::ofstream outfile ("StudentDatabase.txt");
 
-            outfile << "my text hdvn vd jknnjere!" << std::endl;
+           // outfile << "my text hdvn vd jknnjere!" << std::endl;
 
             outfile.close();
         }
@@ -40,6 +41,15 @@ namespace SCRSHA001{
     }
 
     string queryDatabase(vector<StudentRecord> studentRecord ){
+        string records = "";
+        for (StudentRecord student : studentRecord){
+            records = records + student.Name + " " + student.Surname + " " + student.StudentNumber +" " +
+                      student.classRecord.term1 + " " + student.classRecord.term2 + " " +
+                    student.classRecord.term3 + " " + student.classRecord.term4 + " " + "\n";
+            //cout << student << endl;
+        }
+        return records;
+    }
 
 
 
