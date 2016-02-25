@@ -29,7 +29,6 @@ namespace SCRSHA001{
         string line;
         while ( getline(MyFile1,line) ){
             //cout << line << "\n";
-            cout << line << "\n";
             studentRecord = addFromDatabase(line,studentRecord);
             //studentRecord.push_back(line);
         }
@@ -49,6 +48,36 @@ namespace SCRSHA001{
             //cout << student << endl;
         }
         return records;
+    }
+
+    vector<StudentRecord> addFromDatabase(std::string studentInfo,std::vector<StudentRecord> stdRecords){
+        stringstream ssin(studentInfo);
+        string name;
+        string surname;
+        string studentNum;
+        string term1;
+        string term2;
+        string term3;
+        string term4;
+
+        ssin >>name;
+        ssin >>surname;
+        ssin >> studentNum;
+        ssin >>term1;
+        ssin >>term2;
+        ssin >>term3;
+        ssin >>term4;
+        ClassRecord classRecord {term1, term2 , term3 , term4};
+        StudentRecord studentFromDatabase {name, surname, studentNum, classRecord};
+        return add_student(studentFromDatabase,stdRecords);
+
+    }
+
+    vector<StudentRecord> add_student(StudentRecord studentRecord,std::vector<StudentRecord> studentRecords){
+        //studentRecords.reserve(10);
+        studentRecords.push_back(studentRecord);
+
+        return studentRecords;
     }
 
 

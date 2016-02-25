@@ -6,6 +6,9 @@
 
 using namespace std;
 using namespace SCRSHA001;
+
+void clear(void){ system("clear");}
+
 int main() {
     string choice = "-1";
     std::vector<StudentRecord> studentRecord = setUpDatabaseFromFile();
@@ -47,7 +50,15 @@ int main() {
         else if (choice == "2"){
             saveDatabaseToFile(studentRecord);
         }
-
+        else if (choice == "3"){
+            string studentNumSearch;
+            cout << "Type in student number" <<endl;
+            cin >> studentNumSearch;
+            if (find(studentRecord.begin(),studentRecord.end(),studentNumSearch))
+        }
+        else if (choice == "clear"){
+            clear();
+        }
         else{
             break;
         }
