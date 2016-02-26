@@ -1,5 +1,6 @@
 //
 // Created by Shaaheen on 2/24/2016.
+// Header for the database utils file implementation
 //
 
 #ifndef DATABASEUTILS_H

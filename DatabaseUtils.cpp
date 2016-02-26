@@ -1,5 +1,7 @@
 //
-// Created by Shaaheen on 2/24/2016.
+// Created by Shaaheen Sacoor on 2/24/2016.
+// SCRSHA001
+// File that contains all the utility methods used to interact with the database (Vector or File)
 //
 
 #include "DatabaseUtils.h"
@@ -106,6 +108,17 @@ namespace SCRSHA001{
         return StudentRecord{"","","","",0};
     }
 
+    double calculateGradeAverage(StudentRecord studentRecord){
+        stringstream stream(studentRecord.classRecord);
+        int totalMarks = 0;
+        int numMarks = 0;
+        int termMark;
+        while (stream >> termMark){
+            totalMarks = totalMarks  + termMark;
+            numMarks ++;
+        }
+        return ((totalMarks+0.0)/numMarks);
+    }
 
 
 }

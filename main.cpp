@@ -1,3 +1,9 @@
+//
+// Created by Shaaheen Sacoor on 2/24/2016.
+// SCRSHA001
+// Main driver implementation to run the gui interface
+//
+
 #include <iostream>
 #include "header.h"
 #include "DatabaseUtils.h"
