@@ -13,6 +13,7 @@ using namespace std;
 namespace SCRSHA001{
 
     vector<StudentRecord> setUpDatabaseFromFile(){
+        cout << "function setUpDatabaseFromFile()called" << endl;
         std::vector<StudentRecord> studentRecord;
 
         ifstream MyFile("StudentDatabase.txt");
@@ -41,11 +42,11 @@ namespace SCRSHA001{
 
     string studentRecordToString(StudentRecord student){
         return student.Name + " " + student.Surname + " " + student.StudentNumber +" " +
-               student.classRecord.term1 + " " + student.classRecord.term2 + " " +
-               student.classRecord.term3 + " " + student.classRecord.term4;
+               student.classRecord;
     }
 
     string queryDatabase(vector<StudentRecord> studentRecord ){
+        cout << "function queryDatabase(vector<StudentRecord> studentRecord)called" << endl;
         string records = "";
         for (StudentRecord student : studentRecord){
             records = records + studentRecordToString(student) + "\n";
@@ -54,37 +55,36 @@ namespace SCRSHA001{
         return records;
     }
 
-    vector<StudentRecord> addFromDatabase(std::string studentInfo,std::vector<StudentRecord> stdRecords){
+    vector<StudentRecord> addFromDatabase(string studentInfo,vector<StudentRecord> stdRecords){
+        cout << "function addFromDatabase(string studentInfo, vector<StudentRecord> stdRecords)called" << endl;
         stringstream ssin(studentInfo);
         string name;
         string surname;
         string studentNum;
-        string term1;
-        string term2;
-        string term3;
-        string term4;
+        string classRecord = "";
 
         ssin >>name;
         ssin >>surname;
         ssin >> studentNum;
-        ssin >>term1;
-        ssin >>term2;
-        ssin >>term3;
-        ssin >>term4;
-        ClassRecord classRecord {term1, term2 , term3 , term4};
-        StudentRecord studentFromDatabase {name, surname, studentNum, classRecord};
+
+        string item;
+        while (ssin >> item){
+            classRecord = classRecord + item + " ";
+        }
+        classRecord = classRecord.substr(0,classRecord.size() - 1);
+        StudentRecord studentFromDatabase {name, surname, studentNum, classRecord, 1};
         return add_student(studentFromDatabase,stdRecords);
 
     }
 
     vector<StudentRecord> add_student(StudentRecord studentRecord,std::vector<StudentRecord> studentRecords){
-        //studentRecords.reserve(10);
         studentRecords.push_back(studentRecord);
 
         return studentRecords;
     }
 
-    void saveDatabaseToFile(std::vector<StudentRecord> studentRecords){
+    void saveDatabaseToFile(vector<StudentRecord> studentRecords){
+        cout << "function saveDatabaseToFile(vector<StudentRecord> studentRecords) called" << endl;
         fstream  databaseFile;
         databaseFile.open("StudentDatabase.txt", ios::out);
         for (StudentRecord student:studentRecords){
@@ -92,6 +92,20 @@ namespace SCRSHA001{
         }
         databaseFile.close();
     }
+
+    StudentRecord findStudentInDatabase(std::string studentNum, std::vector<StudentRecord> stdRecords){
+        cout << "function findStudentInDatabase(std::string studentNum, std::vector<StudentRecord> stdRecords called" << endl;
+        int index = 0;
+        for (StudentRecord student:stdRecords){
+            if (student.StudentNumber == studentNum){
+                student.canFind = index;
+                return student;
+            }
+            index ++;
+        }
+        return StudentRecord{"","","","",0};
+    }
+
 
 
 }

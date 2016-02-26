@@ -10,10 +10,12 @@ using namespace SCRSHA001;
 void clear(void){ system("clear");}
 
 int main() {
-    string choice = "-1";
+    string choice;
     std::vector<StudentRecord> studentRecord = setUpDatabaseFromFile();
 
     while (true) {
+        choice = "-1";
+
         cout << "0: Add student" << endl;
         cout << "1: Read database" << endl;
         cout << "2: Save database" << endl;
@@ -23,38 +25,65 @@ int main() {
         cout << "Enter a number (or q to quit) and press return... "<< endl;
         cin >> choice;
 
-        if (choice == "0"){
+        if (choice == "1"){
             string name;
             string surname;
             string studentNum;
-            SCRSHA001::ClassRecord classRecord;
+            string classRecord = "";
+
             cout << "Name:" <<endl;
             cin >> name;
             cout << "Surname:" <<endl;
             cin >> surname;
             cout << "StudentNumber:" <<endl;
             cin >> studentNum;
-            cout << "ClassRecord:" <<endl;
-            cout << "Term records: (eg 56 65 71 72)" <<endl;
-            cin >> classRecord.term1 >> classRecord.term2 >> classRecord.term3 >> classRecord.term4;
+            cout << "ClassRecord: (eg 56 65 71 72)\n";
+            getline(cin,classRecord);
+            getline(cin,classRecord);
 
-            StudentRecord newStudent {name,surname,studentNum,classRecord};
-            studentRecord = add_student(newStudent ,studentRecord);
+            int canfind = 1;
+            StudentRecord newStudent {name,surname,studentNum,classRecord,canfind};
 
-            cout << newStudent.classRecord.term4 <<endl;
-        }
-        else if (choice == "1"){
-            //std:vector<string>::iterator it = studentRecord.begin();
-            cout << SCRSHA001::queryDatabase(studentRecord) <<endl;
+            StudentRecord checkIfAlreadyExists = findStudentInDatabase(studentNum,studentRecord);
+            if (checkIfAlreadyExists.canFind !=0){
+                studentRecord[checkIfAlreadyExists.canFind] = newStudent;
+            }
+            else{
+                studentRecord = add_student(newStudent ,studentRecord);
+            }
+
         }
         else if (choice == "2"){
-            saveDatabaseToFile(studentRecord);
+            cout << SCRSHA001::queryDatabase(studentRecord) <<endl;
         }
         else if (choice == "3"){
+            saveDatabaseToFile(studentRecord);
+        }
+        else if (choice == "4"){
             string studentNumSearch;
             cout << "Type in student number" <<endl;
             cin >> studentNumSearch;
+            StudentRecord foundStudent = findStudentInDatabase(studentNumSearch,studentRecord);
+            if (foundStudent.canFind !=0){
+                cout << studentRecordToString(foundStudent) <<endl;
+            }
+            else{
+                cout << "Student not found in database" << endl;
+            }
 
+        }
+        else if (choice == "5"){
+            string studentNumSearch;
+            cout << "Type in student number" <<endl;
+            cin >> studentNumSearch;
+            StudentRecord foundStudent = findStudentInDatabase(studentNumSearch,studentRecord);
+            if (foundStudent.canFind !=0){
+                cout << "The Grade Average of " << foundStudent.StudentNumber << " is: " <<endl;
+                cout << calculateGradeAverage(foundStudent) << endl;
+            }
+            else{
+                cout << "Student not found in database" << endl;
+            }
         }
         else if (choice == "clear"){
             clear();

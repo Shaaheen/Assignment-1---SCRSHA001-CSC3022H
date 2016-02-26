@@ -9,18 +9,13 @@
 #include <vector>
 
 namespace SCRSHA001{
-    struct ClassRecord{
-        std::string term1;
-        std::string term2;
-        std::string term3;
-        std::string term4;
-    };
 
     struct StudentRecord{
         std::string Name;
         std::string Surname;
         std::string StudentNumber;
-        ClassRecord classRecord;
+        std::string classRecord;
+        int canFind;
     };
 
     std::vector<StudentRecord> setUpDatabaseFromFile();
@@ -36,6 +31,8 @@ namespace SCRSHA001{
     void saveDatabaseToFile(std::vector<StudentRecord> studentRecords);
 
     StudentRecord findStudentInDatabase(std::string studentNum, std::vector<StudentRecord> stdRecords);
+
+    double calculateGradeAverage(StudentRecord studentRecord);
 
 }
 
