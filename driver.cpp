@@ -5,7 +5,6 @@
 //
 
 #include <iostream>
-#include "header.h"
 #include "DatabaseUtils.h"
 #include <fstream>
 #include <vector>
