@@ -28,6 +28,7 @@ int main() {
         cout << "3: Save database" << endl;
         cout << "4: Display given student data" << endl;
         cout << "5: Grade student" << endl;
+        cout << "c: Clear command line" << endl;
         cout << "q: Quit "<< endl;
         cout << "Enter a number (or q to quit) and press return... "<< endl;
         cin >> choice; //record choice made
@@ -97,7 +98,7 @@ int main() {
                 cout << "Student not found in database" << endl;
             }
         }
-        else if (choice == "clear"){
+        else if (choice == "c"){
             clear();
         }
         else{
