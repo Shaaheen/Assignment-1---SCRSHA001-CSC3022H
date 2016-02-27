@@ -1,6 +1,6 @@
 Hey :)
 
-To run:
+To run: 
     1) Go into directory from terminal
     2) Run "make" command in terminal to compile the program
     3) Run "make run" to launch program OR run "./driver" command from terminal
